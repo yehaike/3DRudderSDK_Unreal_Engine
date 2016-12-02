@@ -81,26 +81,28 @@ void F3DRudderDevice::Tick(float DeltaTime)
  
 void F3DRudderDevice::SendControllerEvents() 
 {
-	ns3DRudder::CSdk* pSdk = ns3DRudder::GetSDK();
+	ns3dRudder::CSdk* pSdk = ns3dRudder::GetSDK();
+	ns3dRudder::ModeAxis mode = ns3dRudder::ModeAxis::NormalisedValue;
 	for (unsigned int i = 0;i < _3DRUDDER_SDK_MAX_DEVICE;i++)
 	{
 		if (pSdk->IsDeviceConnected(i))
 		{
-			ns3DRudder::State state;
-			if (pSdk->Get3DRudderState(i, &state) == ns3DRudder::Success)
+			ns3dRudder::Axis axis;
+			ns3dRudder::Status status;
+			if (pSdk->GetAxis(i, mode, &axis) == ns3dRudder::Success)
 			{
-
-				EmitAnalogInputEventForKey(EKeys3DRudder::XAxis, state.aX / 32000.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::YAxis, state.aY / 32000.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::ZAxis, state.aZ / 32000.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::ZRotation, state.rZ / 32000.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Status, state.status, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor1, state.s0 / 65536.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor2, state.s1 / 65536.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor3, state.s2 / 65536.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor4, state.s3 / 65536.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor5, state.s4 / 65536.0, i, 0);
-				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor6, state.s5 / 65536.0, i, 0);
+				status = pSdk->GetStatus(i);
+				EmitAnalogInputEventForKey(EKeys3DRudder::XAxis, axis.m_aX, i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::YAxis, axis.m_aY, i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::ZAxis, axis.m_aZ, i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::ZRotation, axis.m_rZ, i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Status, status, i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor1, pSdk->GetSensor(i, 0), i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor2, pSdk->GetSensor(i, 1), i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor3, pSdk->GetSensor(i, 2), i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor4, pSdk->GetSensor(i, 3), i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor5, pSdk->GetSensor(i, 4), i, 0);
+				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor6, pSdk->GetSensor(i, 5), i, 0);
 			}							   
 		}
 	}
