@@ -1,28 +1,31 @@
 {
-	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "0.6",
-	"FriendlyName": "3dRudder Plugin",
-	"Description": "3dRudder plugin base on the 3dRudderSDK for Unreal Engine",
-	"Category": "Input Devices",
-	"CreatedBy": "support-dev@3drudder.com",
-	"CreatedByURL": "http://www.3drudder.com",
-	"DocsURL": "",
-	"MarketplaceURL": "",
-	"SupportURL": "",
-	"CanContainContent": false,
-	"IsBetaVersion": false,
-	"Installed": true,
-	"Modules": [
+	"FileVersion" : 3,
+	"Version" : 1,
+	"VersionName" : "0.62",
+	"FriendlyName" : "3dRudder Plugin",
+	"Description" : "3dRudder plugin base on the 3dRudderSDK for Unreal Engine",
+	"Category" : "Input Devices",
+	"CreatedBy" : "support-dev@3drudder.com",
+	"CreatedByURL" : "http://www.3drudder.com",
+	"DocsURL" : "",
+	"MarketplaceURL" : "",
+	"SupportURL" : "",
+	"EnabledByDefault" : true,
+	"CanContainContent" : false,
+	"IsBetaVersion" : false,
+	"Installed" : true,
+	"RequiresBuildPlatform" : false,
+	"Modules" :
+	[
 		{
-			"Name": "_3DRudder",
-			"Type": "RuntimeNoCommandlet",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
+			"Name" : "_3DRudder",
+			"Type" : "RuntimeNoCommandlet",
+			"LoadingPhase" : "Default",
+			"WhitelistPlatforms" :
+			[
 				"Win64",
 				"Win32"
 			]
 		}
-	],
-	"RequiresBuildPlatform": false
+	]
 }

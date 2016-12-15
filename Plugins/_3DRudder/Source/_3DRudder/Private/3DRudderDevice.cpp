@@ -82,14 +82,15 @@ void F3DRudderDevice::Tick(float DeltaTime)
 void F3DRudderDevice::SendControllerEvents() 
 {
 	ns3dRudder::CSdk* pSdk = ns3dRudder::GetSDK();
-	ns3dRudder::ModeAxis mode = ns3dRudder::ModeAxis::NormalisedValue;
+	ns3dRudder::ModeAxis mode = ns3dRudder::ModeAxis::ValueWithCurve;
+	ns3dRudder::CurveArray *curves = new ns3dRudder::CurveArray;
 	for (unsigned int i = 0;i < _3DRUDDER_SDK_MAX_DEVICE;i++)
 	{
 		if (pSdk->IsDeviceConnected(i))
 		{
 			ns3dRudder::Axis axis;
 			ns3dRudder::Status status;
-			if (pSdk->GetAxis(i, mode, &axis) == ns3dRudder::Success)
+			if (pSdk->GetAxis(i, mode, &axis, curves) == ns3dRudder::Success)
 			{
 				status = pSdk->GetStatus(i);
 				EmitAnalogInputEventForKey(EKeys3DRudder::XAxis, axis.m_aX, i, 0);

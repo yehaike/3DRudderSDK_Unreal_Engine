@@ -10,7 +10,7 @@
 #endif
 
 #define  _3DRUDDER_SDK_MAX_DEVICE 4
-#define  _3DRUDDER_SDK_VERSION 0x0060
+#define  _3DRUDDER_SDK_VERSION 0x0062
 
 #include <stdint.h>
 
@@ -98,10 +98,10 @@ namespace ns3dRudder
 		}
 		void InitFactory(void)  
 		{
-			m_Curve[CurveRoll]	= Curve(1.0f , 12.0f, 1.0f, 1.0f); 
-			m_Curve[CurvePitch] = Curve(1.0f , 14.0f, 1.0f, 1.0f);
-			m_Curve[CurveUpDown]= Curve(1.0f ,  1.0f, 1.0f, 1.0f);
-			m_Curve[CurveYaw]	= Curve(0.08f, 20.0f, 2.0f, 1.0f);
+			m_Curve[CurveRoll]	= Curve(2.0f , 12.0f, 1.0f, 2.0f); 
+			m_Curve[CurvePitch] = Curve(2.0f , 14.0f, 1.0f, 2.0f);
+			m_Curve[CurveUpDown]= Curve(0.08f,	0.6f, 1.0f, 4.0f);
+			m_Curve[CurveYaw]	= Curve(3.0f , 20.0f, 1.0f, 2.0f);
 			m_pCurve[CurveRoll]		= &m_Curve[CurveRoll];
 			m_pCurve[CurvePitch]	= &m_Curve[CurvePitch];
 			m_pCurve[CurveUpDown]	= &m_Curve[CurveUpDown];
@@ -161,7 +161,7 @@ namespace ns3dRudder
 		virtual bool IsDeviceConnected(uint32_t nPortNumber) const;
 		virtual uint16_t GetVersion(uint32_t nPortNumber,bool bUseCmd=false)  const;
 		virtual ErrorCode HideSystemDevice(uint32_t nPortNumber, bool bHide)  const;
-		virtual bool IsSystemDeviceHided(uint32_t nPortNumber)  const;
+		virtual bool IsSystemDeviceHidden(uint32_t nPortNumber)  const;
 		virtual ErrorCode PlaySnd(uint32_t nPortNumber, uint16_t nFrequency, uint16_t nDuration)  const;
 		virtual ErrorCode ReadCurveFromDevice(uint32_t nPortNumber, CurveType nType, Curve *pCurve)  const;
 		virtual ErrorCode WriteCurveToDevice(uint32_t nPortNumber, CurveType nType, Curve *pCurve)  const;
