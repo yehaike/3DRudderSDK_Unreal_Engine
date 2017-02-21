@@ -10,7 +10,7 @@
 #endif
 
 #define  _3DRUDDER_SDK_MAX_DEVICE 4
-#define  _3DRUDDER_SDK_VERSION 0x0062
+#define  _3DRUDDER_SDK_VERSION 0x0070
 
 #include <stdint.h>
 
@@ -41,11 +41,14 @@ namespace ns3dRudder
 
 	enum ModeAxis
 	{
-		Angle,
-		NormalisedValue,
-		ValueWithCurve,
-		NormalisedValueNonSymmetricalPitch,
-		ValueWithCurveNonSymmetricalPitch
+		UserRefAngle						=0,
+		Angle								=0,
+		NormalizedValue						=2,
+		NormalisedValue						=2,
+		ValueWithCurve						=3,
+		NormalizedValueNonSymmetricalPitch	=4,
+		NormalisedValueNonSymmetricalPitch	=4,
+		ValueWithCurveNonSymmetricalPitch	=5
 	};
 
 	class Curve
@@ -85,23 +88,25 @@ namespace ns3dRudder
 		{
 			InitFactory();
 		}
-		void InitLinear(void)  
+		void InitLinear()
 		{
-			m_Curve[CurveRoll]	= Curve(0.0f, 18.0f, 1.0f, 1.0f);
-			m_Curve[CurvePitch]	= Curve(0.0f, 18.0f, 1.0f, 1.0f);
-			m_Curve[CurveUpDown]= Curve(0.0f,  1.0f, 1.0f, 1.0f);
-			m_Curve[CurveYaw]	= Curve(0.0f, 25.0f, 1.0f, 1.0f);
+			m_Curve[CurveRoll] = Curve(0.0f, 1.0f, 1.0f, 1.0f);
+			m_Curve[CurvePitch] = Curve(0.0f, 1.0f, 1.0f, 1.0f);
+			m_Curve[CurveUpDown] = Curve(0.0f, 1.0f, 1.0f, 1.0f);
+			m_Curve[CurveYaw] = Curve(0.0f, 1.0f, 1.0f, 1.0f);
+
 			m_pCurve[CurveRoll]		= &m_Curve[CurveRoll];
 			m_pCurve[CurvePitch]	= &m_Curve[CurvePitch];
 			m_pCurve[CurveUpDown]	= &m_Curve[CurveUpDown];
 			m_pCurve[CurveYaw]		= &m_Curve[CurveYaw];
 		}
-		void InitFactory(void)  
+		void InitFactory()
 		{
-			m_Curve[CurveRoll]	= Curve(2.0f , 12.0f, 1.0f, 2.0f); 
-			m_Curve[CurvePitch] = Curve(2.0f , 14.0f, 1.0f, 2.0f);
-			m_Curve[CurveUpDown]= Curve(0.08f,	0.6f, 1.0f, 4.0f);
-			m_Curve[CurveYaw]	= Curve(3.0f , 20.0f, 1.0f, 2.0f);
+			m_Curve[CurveRoll] = Curve(2.0f / 18.0f, 12.0f / 18.0f, 1.0f, 2.0f);
+			m_Curve[CurvePitch] = Curve(2.0f / 18.0f, 14.0f / 18.0f, 1.0f, 2.0f);
+			m_Curve[CurveUpDown] = Curve(0.08f, 0.6f, 1.0f, 4.0f);
+			m_Curve[CurveYaw] = Curve(3.0f / 25.0f, 20.0f / 25.0f, 1.0f, 2.0f);
+
 			m_pCurve[CurveRoll]		= &m_Curve[CurveRoll];
 			m_pCurve[CurvePitch]	= &m_Curve[CurvePitch];
 			m_pCurve[CurveUpDown]	= &m_Curve[CurveUpDown];
@@ -155,7 +160,7 @@ namespace ns3dRudder
 	public:
 		CSdk();
 		~CSdk();
-
+		virtual void Init()  const;
 		virtual uint16_t GetSDKVersion() const;
 		virtual int32_t GetNumberOfConnectedDevice() const ;
 		virtual bool IsDeviceConnected(uint32_t nPortNumber) const;
@@ -170,6 +175,7 @@ namespace ns3dRudder
 		virtual Status GetStatus(uint32_t nPortNumber)  const;
 		virtual uint16_t GetSensor(uint32_t nPortNumber,uint32_t nIndex) const;
 
+		virtual const char *GetErrorText(ErrorCode nError) const;
 		virtual void SetEvent(IEvent *pEvent)  const;
 
 	};
