@@ -76,7 +76,7 @@ F3DRudderDevice::F3DRudderDevice(const TSharedRef< FGenericApplicationMessageHan
 void F3DRudderDevice::Tick(float DeltaTime)
 {
 	// This will spam the log heavily, comment it out for real plugins :)
-	 UE_LOG(Log3DRudderDevice, Log, TEXT("Tick %f"), DeltaTime);
+	// UE_LOG(Log3DRudderDevice, Log, TEXT("Tick %f"), DeltaTime);
 }
  
 void F3DRudderDevice::SendControllerEvents() 
@@ -138,5 +138,6 @@ void F3DRudderDevice::SetChannelValues(int32 ControllerId, const FForceFeedbackV
 // This is where you nicely clean up your plugin when its told to shut down!
 F3DRudderDevice::~F3DRudderDevice() 
 {
+	ns3dRudder::EndSDK();
 	UE_LOG(Log3DRudderDevice, Log, TEXT("Closing 3DRudderDevice"));
 }

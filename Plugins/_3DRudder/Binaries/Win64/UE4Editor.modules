@@ -1,6 +1,7 @@
 {
-	"Changelist" : 3299760,
-	"BuildId" : "",
+	"Changelist" : 3348071,
+	"CompatibleChangelist" : 3299760,
+	"BuildId" : "061ee2a1-1708-49db-bd34-6faec8f81f95",
 	"Modules" : 
 	{
 		"_3DRudder" : "UE4Editor-_3DRudder.dll"
