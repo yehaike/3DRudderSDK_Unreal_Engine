@@ -30,7 +30,7 @@ const FKey EKeys3DRudder::Sensor4("Sensor4");
 const FKey EKeys3DRudder::Sensor5("Sensor5");
 const FKey EKeys3DRudder::Sensor6("Sensor6");
  
-DEFINE_LOG_CATEGORY_STATIC(Log3DRudderDevice, Log, All);
+DEFINE_LOG_CATEGORY_STATIC(Log3dRudderDevice, Log, All);
 
 //UE v4.6 IM event wrappers
 bool EmitKeyUpEventForKey(FKey key, int32 user, bool repeat)
@@ -51,11 +51,10 @@ bool EmitAnalogInputEventForKey(FKey key, float value, int32 user, bool repeat)
 	return FSlateApplication::Get().ProcessAnalogInputEvent(AnalogInputEvent);
 }
 
-
 F3DRudderDevice::F3DRudderDevice(const TSharedRef< FGenericApplicationMessageHandler >& InMessageHandler)
 	: m_MessageHandler(InMessageHandler)
 {
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Starting 3dRudderDevice %x"), ns3dRudder::GetSDK()->GetSDKVersion()); 
+	UE_LOG(Log3dRudderDevice, Log, TEXT("3dRudder version %x"), ns3dRudder::GetSDK()->GetSDKVersion()); 
  
 	// Register the FKeys (Gamepad key for controllers)
 	EKeys::AddMenuCategoryDisplayInfo("3dRudder", LOCTEXT("3dRudderSubCateogry", "3dRudder"), TEXT("GraphEditor.PadEvent_16x"));
@@ -75,7 +74,7 @@ F3DRudderDevice::F3DRudderDevice(const TSharedRef< FGenericApplicationMessageHan
 void F3DRudderDevice::Tick(float DeltaTime)
 {
 	// This will spam the log heavily, comment it out for real plugins :)
-	// UE_LOG(Log3DRudderDevice, Log, TEXT("Tick %f"), DeltaTime);
+	// UE_LOG(Log3dRudderDevice, Log, TEXT("Tick %f"), DeltaTime);
 }
  
 void F3DRudderDevice::SendControllerEvents() 
@@ -122,13 +121,13 @@ void F3DRudderDevice::SendControllerEvents()
  
 void F3DRudderDevice::SetMessageHandler(const TSharedRef< FGenericApplicationMessageHandler >& InMessageHandler) 
 {
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Set Message Handler"));
+	UE_LOG(Log3dRudderDevice, Log, TEXT("Set Message Handler"));
 	m_MessageHandler = InMessageHandler;
 }
  
 bool F3DRudderDevice::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar) 
 {
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Execute Console Command: %s"), Cmd);
+	UE_LOG(Log3dRudderDevice, Log, TEXT("Execute Console Command: %s"), Cmd);
  
 	// Put your fancy custom console command code here... 
 	// ToDo: use this to let you fire pseudo controller events
@@ -139,18 +138,18 @@ bool F3DRudderDevice::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar)
 // IForceFeedbackSystem pass through functions
 void F3DRudderDevice::SetChannelValue(int32 ControllerId, FForceFeedbackChannelType ChannelType, float Value) 
 {
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Set Force Feedback %f"), Value);
+	UE_LOG(Log3dRudderDevice, Log, TEXT("Set Force Feedback %f"), Value);
 }
 
 void F3DRudderDevice::SetChannelValues(int32 ControllerId, const FForceFeedbackValues &values) 
 {
 	// This will spam the log heavily, comment it out for real plugins :)
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Set Force Feedback Values"));
+	UE_LOG(Log3dRudderDevice, Log, TEXT("Set Force Feedback Values"));
 } 
 
 // This is where you nicely clean up your plugin when its told to shut down!
 F3DRudderDevice::~F3DRudderDevice() 
 {
 	ns3dRudder::EndSDK();
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Closing 3DRudderDevice"));
+	UE_LOG(Log3dRudderDevice, Log, TEXT("Closing 3DRudderDevice"));
 }

@@ -13,7 +13,7 @@ namespace UnrealBuildTool.Rules
 
         private string SDKPath
 		{
-			get { return Path.GetFullPath(Path.Combine(ModulePath, "../../3DRudderSDK/")); }
+			get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/3DRudderSDK/")); }
 		}		
 		
         public _3DRudder(TargetInfo Target)
@@ -75,12 +75,11 @@ namespace UnrealBuildTool.Rules
  
                 isLibrarySupported = true;
             }
-            // Add mac/linux/mobile support in much the same way
  
             // If the current build architecture was supported by the above if statements
             if (isLibrarySupported)
             {
-                // Add the architecture spacific path to the library files
+                // Add the architecture specific path to the library files
                 PublicAdditionalLibraries.Add(Path.Combine(SDKPath, "Lib", ArchitecturePath, "3DRudderSDK.lib"));
                 // Add a more generic path to the include header files
                 PublicIncludePaths.Add(Path.Combine(SDKPath, "Include"));
