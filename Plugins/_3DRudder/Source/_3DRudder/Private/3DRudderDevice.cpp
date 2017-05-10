@@ -1,3 +1,5 @@
+// Copyright 3dRudder 2017, Inc. All Rights Reserved.
+
 #include "3DRudderPrivatePCH.h"
  
 #include "3DRudderDevice.h"
@@ -14,7 +16,7 @@
 #define _3DRUDDER_SDK_STATIC
 #include "3DRudderSDK.h"
 
-#define LOCTEXT_NAMESPACE "3DRudder"
+#define LOCTEXT_NAMESPACE "3dRudder"
 
 const FKey EKeys3DRudder::XAxis("XAxis");
 const FKey EKeys3DRudder::YAxis("YAxis");
@@ -27,8 +29,6 @@ const FKey EKeys3DRudder::Sensor3("Sensor3");
 const FKey EKeys3DRudder::Sensor4("Sensor4");
 const FKey EKeys3DRudder::Sensor5("Sensor5");
 const FKey EKeys3DRudder::Sensor6("Sensor6");
-
-
  
 DEFINE_LOG_CATEGORY_STATIC(Log3DRudderDevice, Log, All);
 
@@ -55,22 +55,21 @@ bool EmitAnalogInputEventForKey(FKey key, float value, int32 user, bool repeat)
 F3DRudderDevice::F3DRudderDevice(const TSharedRef< FGenericApplicationMessageHandler >& InMessageHandler)
 	: m_MessageHandler(InMessageHandler)
 {
-	UE_LOG(Log3DRudderDevice, Log, TEXT("Starting 3DRudderDevice %x"), ns3dRudder::GetSDK()->GetSDKVersion());
- 
+	UE_LOG(Log3DRudderDevice, Log, TEXT("Starting 3dRudderDevice %x"), ns3dRudder::GetSDK()->GetSDKVersion()); 
  
 	// Register the FKeys (Gamepad key for controllers)
-	EKeys::AddMenuCategoryDisplayInfo("3DRudder", LOCTEXT("3DRudderSubCateogry", "3DRudder"), TEXT("GraphEditor.PadEvent_16x"));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::XAxis		,LOCTEXT("XAxis"	,"3DRudder XAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::YAxis		,LOCTEXT("YAxis"	,"3DRudder YAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::ZAxis		,LOCTEXT("ZAxis"	,"3DRudder ZAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::ZRotation	,LOCTEXT("ZRotation","3DRudder ZRotation")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Status		,LOCTEXT("Status"	,"3DRudder Status")		,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor1	,LOCTEXT("Sensor1"	,"3DRudder Sensor1")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor2	,LOCTEXT("Sensor2"	,"3DRudder Sensor2")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor3	,LOCTEXT("Sensor3"	,"3DRudder Sensor3")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor4	,LOCTEXT("Sensor4"	,"3DRudder Sensor4")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor5	,LOCTEXT("Sensor5"	,"3DRudder Sensor5")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
-	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor6	,LOCTEXT("Sensor6"	,"3DRudder Sensor6")	,FKeyDetails::FloatAxis, FName(TEXT("3DRudder"))));
+	EKeys::AddMenuCategoryDisplayInfo("3dRudder", LOCTEXT("3dRudderSubCateogry", "3dRudder"), TEXT("GraphEditor.PadEvent_16x"));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::XAxis		,LOCTEXT("XAxis"	,"3dRudder XAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::YAxis		,LOCTEXT("YAxis"	,"3dRudder YAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::ZAxis		,LOCTEXT("ZAxis"	,"3dRudder ZAxis")		,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::ZRotation	,LOCTEXT("ZRotation","3dRudder ZRotation")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Status		,LOCTEXT("Status"	,"3dRudder Status")		,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor1	,LOCTEXT("Sensor1"	,"3dRudder Sensor1")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor2	,LOCTEXT("Sensor2"	,"3dRudder Sensor2")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor3	,LOCTEXT("Sensor3"	,"3dRudder Sensor3")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor4	,LOCTEXT("Sensor4"	,"3dRudder Sensor4")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor5	,LOCTEXT("Sensor5"	,"3dRudder Sensor5")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
+	EKeys::AddKey(FKeyDetails(EKeys3DRudder::Sensor6	,LOCTEXT("Sensor6"	,"3dRudder Sensor6")	,FKeyDetails::FloatAxis, FName(TEXT("3dRudder"))));
 }
  
 void F3DRudderDevice::Tick(float DeltaTime)
@@ -81,23 +80,35 @@ void F3DRudderDevice::Tick(float DeltaTime)
  
 void F3DRudderDevice::SendControllerEvents() 
 {
+	// 3dRudder SDK
 	ns3dRudder::CSdk* pSdk = ns3dRudder::GetSDK();
+	// Mode : curve
 	ns3dRudder::ModeAxis mode = ns3dRudder::ModeAxis::ValueWithCurveNonSymmetricalPitch;
+	// Curves for each axis (Pitch, Roll, Yaw, UpDown)
 	ns3dRudder::CurveArray *curves = new ns3dRudder::CurveArray;
+	// For each device (4)
 	for (unsigned int i = 0;i < _3DRUDDER_SDK_MAX_DEVICE;i++)
 	{
 		if (pSdk->IsDeviceConnected(i))
 		{
+			// Axis : X, Y, Z, rZ
 			ns3dRudder::Axis axis;
+			// Status of 3dRudder
 			ns3dRudder::Status status;
 			if (pSdk->GetAxis(i, mode, &axis, curves) == ns3dRudder::Success)
 			{
 				status = pSdk->GetStatus(i);
+				// Roll
 				EmitAnalogInputEventForKey(EKeys3DRudder::XAxis, axis.m_aX, i, 0);
+				// Pitch
 				EmitAnalogInputEventForKey(EKeys3DRudder::YAxis, axis.m_aY, i, 0);
+				// UpDown
 				EmitAnalogInputEventForKey(EKeys3DRudder::ZAxis, axis.m_aZ, i, 0);
+				// Yaw
 				EmitAnalogInputEventForKey(EKeys3DRudder::ZRotation, axis.m_rZ, i, 0);
+				// Status
 				EmitAnalogInputEventForKey(EKeys3DRudder::Status, status, i, 0);
+				// 6 Sensors
 				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor1, pSdk->GetSensor(i, 0), i, 0);
 				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor2, pSdk->GetSensor(i, 1), i, 0);
 				EmitAnalogInputEventForKey(EKeys3DRudder::Sensor3, pSdk->GetSensor(i, 2), i, 0);
@@ -126,14 +137,16 @@ bool F3DRudderDevice::Exec(UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Ar)
 }
 
 // IForceFeedbackSystem pass through functions
-void F3DRudderDevice::SetChannelValue(int32 ControllerId, FForceFeedbackChannelType ChannelType, float Value) {
+void F3DRudderDevice::SetChannelValue(int32 ControllerId, FForceFeedbackChannelType ChannelType, float Value) 
+{
 	UE_LOG(Log3DRudderDevice, Log, TEXT("Set Force Feedback %f"), Value);
 }
-void F3DRudderDevice::SetChannelValues(int32 ControllerId, const FForceFeedbackValues &values) {
+
+void F3DRudderDevice::SetChannelValues(int32 ControllerId, const FForceFeedbackValues &values) 
+{
 	// This will spam the log heavily, comment it out for real plugins :)
 	UE_LOG(Log3DRudderDevice, Log, TEXT("Set Force Feedback Values"));
-}
- 
+} 
 
 // This is where you nicely clean up your plugin when its told to shut down!
 F3DRudderDevice::~F3DRudderDevice() 

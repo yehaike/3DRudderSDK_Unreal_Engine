@@ -1,3 +1,4 @@
+// Copyright 3dRudder 2017, Inc. All Rights Reserved.
 
 #pragma once
 

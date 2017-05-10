@@ -1,7 +1,9 @@
+// Copyright 3dRudder 2017, Inc. All Rights Reserved.
+
+using System.IO;
+
 namespace UnrealBuildTool.Rules
-{
-    using System.IO; // ToDo: Replace with standard mechenism
- 
+{ 
     public class _3DRudder : ModuleRules
     {
 		private string ModulePath

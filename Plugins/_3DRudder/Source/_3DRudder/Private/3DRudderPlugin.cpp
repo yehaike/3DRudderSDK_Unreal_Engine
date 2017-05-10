@@ -1,13 +1,13 @@
+// Copyright 3dRudder 2017, Inc. All Rights Reserved.
+
 #include "3DRudderPrivatePCH.h"
 
 #include "Internationalization.h" // LOCTEXT
 #include "InputCoreTypes.h"
  
-#include "3DRudderPlugin.h"
- 
+#include "3DRudderPlugin.h" 
 #include "I3DRudderPlugin.h"
- 
-//#include "_3DRudder.generated.inl"
+
  
 IMPLEMENT_MODULE(F3DRudderPlugin, _3DRudder)
 DEFINE_LOG_CATEGORY_STATIC(_3DRudderPlugin, Log, All);
