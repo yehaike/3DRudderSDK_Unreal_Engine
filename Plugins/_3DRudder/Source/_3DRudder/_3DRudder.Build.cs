@@ -13,7 +13,7 @@ namespace UnrealBuildTool.Rules
 
         private string SDKPath
 		{
-			get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/3DRudderSDK/")); }
+			get { return Path.GetFullPath(Path.Combine(ModulePath, "../ThirdParty/3DRudderSDK/")); }
 		}		
 		
         public _3DRudder(TargetInfo Target)
