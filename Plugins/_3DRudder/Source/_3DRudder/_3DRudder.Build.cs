@@ -16,7 +16,7 @@ namespace UnrealBuildTool.Rules
 			get { return Path.GetFullPath(Path.Combine(ModulePath, "../ThirdParty/3DRudderSDK/")); }
 		}		
 		
-        public _3DRudder(TargetInfo Target)
+        public _3DRudder(ReadOnlyTargetRules Target): base(Target)
         {
             PCHUsage = PCHUsageMode.NoSharedPCHs;
  
@@ -31,7 +31,8 @@ namespace UnrealBuildTool.Rules
             });
  
             // ... add other public dependencies that you statically link with here ...
-            PublicDependencyModuleNames.AddRange( new string[] { 
+            PublicDependencyModuleNames.AddRange( new string[] {
+                "AppFramework",
                 "Core", 
                 "CoreUObject",      // Provides Actors and Structs
                 "Engine",           // Used by Actor
@@ -39,11 +40,13 @@ namespace UnrealBuildTool.Rules
                 "SlateCore",
                 "Projects",
                 "InputCore",        // Provides LOCTEXT and other Input features
-                "InputDevice",      // Provides IInputInterface
+                "InputDevice",      // Provides IInputInterface    
+                "UnrealEd",
             });
  
             // ... add private dependencies that you statically link with here ...
             PrivateDependencyModuleNames.AddRange( new string[] {
+                "UnrealEd",
             });
  
             // ... add any modules that your module loads dynamically here ...
@@ -53,7 +56,7 @@ namespace UnrealBuildTool.Rules
             LoadThirdPartyLibraries(Target);
         }
  
-        public bool LoadThirdPartyLibraries(TargetInfo Target)
+        public bool LoadThirdPartyLibraries(ReadOnlyTargetRules Target)
         {
             bool isLibrarySupported = false;
  

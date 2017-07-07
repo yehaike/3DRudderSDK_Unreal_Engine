@@ -12,5 +12,8 @@ public:
 	//virtual void StartupModule() OVERRIDE; // This is not required as IInputDeviceModule handels it!
 	virtual void ShutdownModule() override;
  
+	void RegisterSettings();
+	void UnregisterSettings();
+
 	TSharedPtr< class F3DRudderDevice > m_3DRudderDevice;
 };

@@ -4,9 +4,8 @@
  
 #include <InputDevice.h>
 
-
 // Input Mapping Keys
-struct EKeys3DRudder
+struct EKeys3dRudder
 {
 	static const FKey XAxis;
 	static const FKey YAxis;
@@ -20,7 +19,7 @@ struct EKeys3DRudder
 	static const FKey Sensor5;
 	static const FKey Sensor6;
 };
- 
+
 /**
 * Interface class for 3DRudder devices 
 */
@@ -44,6 +43,8 @@ public:
 	// IForceFeedbackSystem pass through functions
 	void SetChannelValue(int32 ControllerId, FForceFeedbackChannelType ChannelType, float Value) override;
 	void SetChannelValues(int32 ControllerId, const FForceFeedbackValues& Values) override;
+
+	void UpdateViewportCamera(const FVector& translation, float yaw);
 
 	virtual ~F3DRudderDevice();
 private:
