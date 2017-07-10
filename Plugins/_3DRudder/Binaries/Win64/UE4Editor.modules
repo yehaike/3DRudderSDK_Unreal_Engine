@@ -4,7 +4,7 @@
 	"BuildId" : "9d235d2e-0699-4a67-a724-267cd6977962",
 	"Modules" : 
 	{
-		"_3DRudder" : "UE4Editor-_3DRudder.dll",
-		"_3DRudderEditor" : "UE4Editor-_3DRudderEditor.dll"
+		"_3DRudder" : "UE4Editor-_3DRudder-3754.dll",
+		"_3DRudderEditor" : "UE4Editor-_3DRudderEditor-1059.dll"
 	}
 }

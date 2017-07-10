@@ -32,21 +32,17 @@ namespace UnrealBuildTool.Rules
  
             // ... add other public dependencies that you statically link with here ...
             PublicDependencyModuleNames.AddRange( new string[] {
-                "AppFramework",
                 "Core", 
-                "CoreUObject",      // Provides Actors and Structs
                 "Engine",           // Used by Actor
                 "Slate",            // Used by InputDevice to fire bespoke FKey events
                 "SlateCore",
                 "Projects",
                 "InputCore",        // Provides LOCTEXT and other Input features
                 "InputDevice",      // Provides IInputInterface    
-                "UnrealEd",
             });
  
             // ... add private dependencies that you statically link with here ...
             PrivateDependencyModuleNames.AddRange( new string[] {
-                "UnrealEd",
             });
  
             // ... add any modules that your module loads dynamically here ...

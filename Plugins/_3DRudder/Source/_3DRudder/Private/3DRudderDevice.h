@@ -44,8 +44,6 @@ public:
 	void SetChannelValue(int32 ControllerId, FForceFeedbackChannelType ChannelType, float Value) override;
 	void SetChannelValues(int32 ControllerId, const FForceFeedbackValues& Values) override;
 
-	void UpdateViewportCamera(const FVector& translation, float yaw);
-
 	virtual ~F3DRudderDevice();
 private:
  

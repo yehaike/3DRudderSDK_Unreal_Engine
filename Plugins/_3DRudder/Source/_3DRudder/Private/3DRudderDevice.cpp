@@ -11,9 +11,6 @@
 #include "WindowsCursor.h"
 #include "GenericApplicationMessageHandler.h"
 #include "InputDevice.h"
-#include "EditorViewportClient.h"
-#include "Editor.h"
-#include "3DRudderSettings.h"
 
 #define _3DRUDDER_SDK_STATIC
 #include "3DRudderSDK.h"
@@ -85,7 +82,7 @@ void F3DRudderDevice::SendControllerEvents()
 	// 3dRudder SDK
 	ns3dRudder::CSdk* pSdk = ns3dRudder::GetSDK();
 	// Mode : curve
-	ns3dRudder::ModeAxis mode = (ns3dRudder::ModeAxis)GetDefault<U3DRudderSettings>()->Mode;
+	ns3dRudder::ModeAxis mode = ns3dRudder::ValueWithCurveNonSymmetricalPitch;
 	// Curves for each axis (Pitch, Roll, Yaw, UpDown)
 	ns3dRudder::CurveArray *curves = new ns3dRudder::CurveArray;
 	// For each device (4)
@@ -117,35 +114,7 @@ void F3DRudderDevice::SendControllerEvents()
 				EmitAnalogInputEventForKey(EKeys3dRudder::Sensor4, pSdk->GetSensor(i, 3), i, 0);
 				EmitAnalogInputEventForKey(EKeys3dRudder::Sensor5, pSdk->GetSensor(i, 4), i, 0);
 				EmitAnalogInputEventForKey(EKeys3dRudder::Sensor6, pSdk->GetSensor(i, 5), i, 0);				
-
-				if (i == 0 && GetDefault<U3DRudderSettings>()->bActive)
-					UpdateViewportCamera(FVector(axis.m_aY, axis.m_aX, axis.m_aZ), axis.m_rZ);
 			}							   
-		}
-	}
-}
- 
-void F3DRudderDevice::UpdateViewportCamera(const FVector& translation, float yaw)
-{
-	if (translation.IsZero() && yaw == 0)
-		return;
-
-	if (GEditor != nullptr && GEditor->GetActiveViewport() != nullptr && GEditor->GetActiveViewport()->GetClient() != nullptr)
-	{
-		FEditorViewportClient* client = StaticCast<FEditorViewportClient*>(GEditor->GetActiveViewport()->GetClient());
-		if (client != nullptr)
-		{
-			const FVector speed = GetDefault<U3DRudderSettings>()->Translation;
-			const float speedRotation = GetDefault<U3DRudderSettings>()->RotationYaw;
-			// X Y local
-			FVector local(translation.X * speed.X, translation.Y * speed.Y, 0);
-			FVector world = client->GetViewRotation().RotateVector(local);
-			// Z world
-			world += FVector(0.0f, 0.0f, translation.Z * speed.Z);
-			// Pitch Yaw Roll
-			FRotator rotation(0, yaw * speedRotation, 0);
-			// Move Camera of Viewport with 3dRudder
-			client->MoveViewportCamera(world, rotation);
 		}
 	}
 }
