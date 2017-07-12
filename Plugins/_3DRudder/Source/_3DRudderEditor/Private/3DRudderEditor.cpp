@@ -74,14 +74,15 @@ void F3DRudderEditorModule::Tick(float DeltaTime)
 
 void F3DRudderEditorModule::UpdateViewportCamera(const FVector& translation, float yaw)
 {
+	//UE_LOG(_3DRudderEditor, Warning, TEXT("tick %f"), yaw);
 	if (translation.IsZero() && yaw == 0)
 		return;
 
 	if (GEditor != nullptr && GEditor->GetActiveViewport() != nullptr && GEditor->GetActiveViewport()->GetClient() != nullptr)
 	{
-		FEditorViewportClient* client = StaticCast<FEditorViewportClient*>(GEditor->GetActiveViewport()->GetClient());
+		FEditorViewportClient* client = StaticCast<FEditorViewportClient*>(GEditor->GetActiveViewport()->GetClient());		
 		if (client != nullptr && !client->Viewport->IsPlayInEditorViewport())
-		{
+		{			
 			const FVector speed = GetDefault<U3DRudderSettings>()->Translation;
 			const float speedRotation = GetDefault<U3DRudderSettings>()->RotationYaw;
 			// X Y local
