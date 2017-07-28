@@ -5,6 +5,8 @@
 
 # 3dRudder SDK Unreal Engine 4.16
 
+Available on the MarketPlace : https://www.unrealengine.com/marketplace/3drudder-controller-plugin
+
 Documentation for the plugin is available : [Plugin](Doc/3dRudderPluginUnrealEngine4.pdf)
 
 Documentation for the SDK is available : [SDK](https://github.com/3DRudder/3DRudderSDK/blob/master/Doc/3dRudderSDK.pdf)
