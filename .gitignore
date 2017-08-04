@@ -70,4 +70,4 @@ DerivedDataCache/*
 .ctrlp_cache/
 
 # Plugin
-Plugins/_3DRudder/Intermediate/*
+Plugins/3DRudder/Intermediate/*

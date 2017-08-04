@@ -5,8 +5,9 @@
 	"Description": "",
 	"Plugins": [
 		{
-			"Name": "_3DRudder",
-			"Enabled": true
+			"Name": "3DRudder",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/8224f641f1854345a1c10d32e66218d0"
 		}
 	],
 	"TargetPlatforms": [
