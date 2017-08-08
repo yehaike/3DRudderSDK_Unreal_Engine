@@ -10,7 +10,7 @@
 #endif
 
 #define  _3DRUDDER_SDK_MAX_DEVICE 4
-#define  _3DRUDDER_SDK_VERSION 0x0070
+#define  _3DRUDDER_SDK_VERSION 0x0100
 
 #include <stdint.h>
 
@@ -42,21 +42,45 @@ namespace ns3dRudder
 	enum ModeAxis
 	{
 		UserRefAngle						=0,
-		Angle								=0,
 		NormalizedValue						=2,
-		NormalisedValue						=2,
 		ValueWithCurve						=3,
 		NormalizedValueNonSymmetricalPitch	=4,
-		NormalisedValueNonSymmetricalPitch	=4,
 		ValueWithCurveNonSymmetricalPitch	=5
 	};
+
+
+	class Tone
+	{
+	public:
+		Tone()
+		{
+			m_nFrequency = 440; // A
+			m_nDurationOfTone = 500 / 10;
+			m_nPauseAfterTone = 500 / 10;
+		}
+		
+		Tone(uint16_t nFrequency, uint16_t nDurationOfTone, uint16_t nPauseAfterTone)
+		{
+			m_nFrequency = nFrequency;
+			m_nDurationOfTone =uint8_t(nDurationOfTone);
+			m_nPauseAfterTone = uint8_t(nPauseAfterTone);
+		}
+
+		uint16_t m_nFrequency;
+		uint8_t m_nDurationOfTone;
+		uint8_t m_nPauseAfterTone;
+	};
+
 
 	class Curve
 	{
 	public:
 		Curve()
 		{
-			m_fDeadZone = 0; m_fxSat = 0; m_fyMax = 0; m_fExp = 0;
+			m_fDeadZone = 0;
+			m_fxSat = 1.0;  // GetAxisValueForMode reforce au minimum à 1.0
+			m_fyMax = 0;
+			m_fExp = 0;
 		}
 		Curve(float fDeadZone,float fxSat,float fyMax,float fExp)
 		{
@@ -64,12 +88,12 @@ namespace ns3dRudder
 		}
 		virtual ~Curve() {}
 		float GetDeadZone()  const { return m_fDeadZone; }
-		float GeXSat()		 const { return m_fxSat; }
+		float GetXSat()		 const { return m_fxSat; }
 		float GetYMax()		 const { return m_fyMax; }
 		float GetExp()		 const { return m_fExp; }
 
 		void SetDeadZone(float fV)	{ m_fDeadZone=fV; }
-		void SeXSat(float fV)		{ m_fxSat = fV; }
+		void SetXSat(float fV)		{ m_fxSat = fV; }
 		void SetYMax(float fV)		{ m_fyMax = fV; }
 		void SetExp(float fV)		{ m_fExp = fV; }
 
@@ -154,32 +178,45 @@ namespace ns3dRudder
 		virtual void OnDisconnect(uint32_t nDeviceNumber) { _3DR_UNUSED(nDeviceNumber); };
 	};
 
-
 	class CSdk
 	{
 	public:
 		CSdk();
-		~CSdk();
+		virtual ~CSdk();
 		virtual void Init()  const;
 		virtual uint16_t GetSDKVersion() const;
-		virtual int32_t GetNumberOfConnectedDevice() const ;
+		virtual int32_t GetNumberOfConnectedDevice() const;
 		virtual bool IsDeviceConnected(uint32_t nPortNumber) const;
-		virtual uint16_t GetVersion(uint32_t nPortNumber,bool bUseCmd=false)  const;
+		virtual uint16_t GetVersion(uint32_t nPortNumber, bool bUseCmd = false)  const;
 		virtual ErrorCode HideSystemDevice(uint32_t nPortNumber, bool bHide)  const;
 		virtual bool IsSystemDeviceHidden(uint32_t nPortNumber)  const;
 		virtual ErrorCode PlaySnd(uint32_t nPortNumber, uint16_t nFrequency, uint16_t nDuration)  const;
-		virtual ErrorCode ReadCurveFromDevice(uint32_t nPortNumber, CurveType nType, Curve *pCurve)  const;
-		virtual ErrorCode WriteCurveToDevice(uint32_t nPortNumber, CurveType nType, Curve *pCurve)  const;
+		virtual ErrorCode PlaySndEx(uint32_t nPortNumber, uint8_t nSize, Tone *pTones, bool bWait = true)  const;
+		virtual ErrorCode PlaySndEx(uint32_t nPortNumber, char *sTones, bool bWait = true)  const;
 		virtual ErrorCode GetUserOffset(uint32_t nPortNumber, Axis *pAxis)  const;
-		virtual ErrorCode GetAxis(uint32_t nPortNumber,ModeAxis nMode,Axis *pAxis,const CurveArray *pCurve=nullptr) const;
+		virtual ErrorCode GetAxis(uint32_t nPortNumber, ModeAxis nMode, Axis *pAxis, const CurveArray *pCurve = nullptr) const;
 		virtual Status GetStatus(uint32_t nPortNumber)  const;
-		virtual uint16_t GetSensor(uint32_t nPortNumber,uint32_t nIndex) const;
+		virtual uint16_t GetSensor(uint32_t nPortNumber, uint32_t nIndex) const;
+
+		virtual ErrorCode SetFreeze(uint32_t nPortNumber, bool bEnable)const;
 
 		virtual const char *GetErrorText(ErrorCode nError) const;
 		virtual void SetEvent(IEvent *pEvent)  const;
+
+
+		virtual float CalcCurveValue(float fDeadZone, float fxSat, float fyMax, float fExp, float fValue)  const;
 
 	};
 
 	_3DRUDDER_SDK_EXPORT CSdk* GetSDK();
 	_3DRUDDER_SDK_EXPORT void EndSDK();
+
+	inline float Curve::CalcCurveValue(float fValue)  const
+	{
+		CSdk* pSdk = GetSDK();
+		return pSdk->CalcCurveValue(m_fDeadZone, m_fxSat, m_fyMax, m_fExp, fValue);
+	}
+
+
+
 }

@@ -11,9 +11,9 @@ Documentation for the plugin is available : [Plugin](Doc/3dRudderPluginUnrealEng
 
 Documentation for the SDK is available : [SDK](https://github.com/3DRudder/3DRudderSDK/blob/master/Doc/3dRudderSDK.pdf)
 
-## Version v0.7
+## Version v0.8
 
-### Sample VR on Unreal Engine (4.16) with 3dRudder controller plugin and the 3dRudder SDK v0.7, see release
+### Sample VR on Unreal Engine (4.16) with 3dRudder controller plugin and the 3dRudder SDK v1.0, see release
 
 Use "space" key to active the Up/Down in the sample
 
