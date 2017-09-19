@@ -1,7 +1,7 @@
 {
     "FileVersion" : 3,
     "Version" : 2,
-    "VersionName" : "2.0",
+    "VersionName" : "2.1",
     "FriendlyName" : "3dRudder Plugin",
     "Description" : "3dRudder plugin base on the 3dRudderSDK for Unreal Engine",
     "Category" : "Input Devices",
@@ -9,7 +9,7 @@
     "CreatedByURL" : "http://www.3drudder.com",
     "DocsURL" : "https://github.com/3DRudder/3DRudderSDK_Unreal_Engine/blob/master/Doc/3dRudderPluginUnrealEngine4.pdf",
     "MarketplaceURL" : "com.epicgames.launcher://ue/marketplace/content/8224f641f1854345a1c10d32e66218d0",
-    "EngineVersion" : "4.16.0",
+    "EngineVersion" : "4.17.0",
     "SupportURL" : "https://www.3drudder.com/contact/",
     "CanContainContent" : false,
     "IsBetaVersion" : false,

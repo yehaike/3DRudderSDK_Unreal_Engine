@@ -59,16 +59,14 @@ namespace UnrealBuildTool.Rules
             string ArchitecturePath = "";
  
             // When you are building for Win64
-            if (Target.Platform == UnrealTargetPlatform.Win64 &&
-                WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2015)
+            if (Target.Platform == UnrealTargetPlatform.Win64) 
             {
                 ArchitecturePath = "x64\\Static";
  
                 isLibrarySupported = true;
             }
             // When you are building for Win32
-            else if (Target.Platform == UnrealTargetPlatform.Win32 &&
-                WindowsPlatform.Compiler == WindowsCompiler.VisualStudio2015)
+            else if (Target.Platform == UnrealTargetPlatform.Win32)
             {
                 ArchitecturePath = "Win32\\Static";
  
