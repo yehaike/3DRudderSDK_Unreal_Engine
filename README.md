@@ -1,9 +1,9 @@
 ![language](https://img.shields.io/badge/Language-BluePrints-green.svg) 
-![dependencies](https://img.shields.io/badge/Dependecies-Unreal%20Engine%204.16-green.svg)
+![dependencies](https://img.shields.io/badge/Dependecies-Unreal%20Engine%204.17-green.svg)
 
 ![Firmware 3dRudder](https://img.shields.io/badge/Firmware%203dRudder-%3E%20v1.3.4.0-brightgreen.svg)
 
-# 3dRudder SDK Unreal Engine 4.16
+# 3dRudder SDK Unreal Engine 4.17
 
 Available on the MarketPlace : https://www.unrealengine.com/marketplace/3drudder-controller-plugin
 
@@ -11,9 +11,9 @@ Documentation for the plugin is available : [Plugin](Doc/3dRudderPluginUnrealEng
 
 Documentation for the SDK is available : [SDK](https://github.com/3DRudder/3DRudderSDK/blob/master/Doc/3dRudderSDK.pdf)
 
-## Version v0.8
+## Version v0.9
 
-### Sample VR on Unreal Engine (4.16) with 3dRudder controller plugin and the 3dRudder SDK v1.0, see release
+### Sample VR on Unreal Engine (4.17) with 3dRudder controller plugin and the 3dRudder SDK v1.0, see release
 
 Use "space" key to active the Up/Down in the sample
 
