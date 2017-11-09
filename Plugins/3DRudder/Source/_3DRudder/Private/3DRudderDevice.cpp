@@ -1,8 +1,7 @@
 // Copyright 3dRudder 2017, Inc. All Rights Reserved.
 
-#include "3DRudderPrivatePCH.h"
- 
 #include "3DRudderDevice.h"
+#include "3DRudderPrivatePCH.h"
  
 #include "SlateBasics.h"
  

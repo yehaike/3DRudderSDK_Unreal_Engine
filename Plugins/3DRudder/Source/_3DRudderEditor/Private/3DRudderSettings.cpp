@@ -1,5 +1,6 @@
-#include "3DRudderEditor.h"
+
 #include "3DRudderSettings.h"
+#include "3DRudderEditor.h"
 
 U3DRudderSettings::U3DRudderSettings(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {

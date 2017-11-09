@@ -1,12 +1,12 @@
 // Copyright 3dRudder 2017, Inc. All Rights Reserved.
 
+#include "3DRudderPlugin.h" 
 #include "3DRudderPrivatePCH.h"
 
 #include "Internationalization.h" // LOCTEXT
 #include "InputCoreTypes.h"
  
 // Plugins
-#include "3DRudderPlugin.h" 
 #include "I3DRudderPlugin.h"
 
 IMPLEMENT_MODULE(F3DRudderPlugin, _3DRudder)

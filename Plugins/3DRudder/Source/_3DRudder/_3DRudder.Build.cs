@@ -18,7 +18,7 @@ namespace UnrealBuildTool.Rules
 		
         public _3DRudder(ReadOnlyTargetRules Target): base(Target)
         {
-            PCHUsage = PCHUsageMode.NoSharedPCHs;
+            PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
  
             // ... add public include paths required here ...
             PublicIncludePaths.AddRange( new string[] {

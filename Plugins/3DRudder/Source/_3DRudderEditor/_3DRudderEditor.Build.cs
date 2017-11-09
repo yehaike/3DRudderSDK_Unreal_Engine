@@ -17,9 +17,11 @@ namespace UnrealBuildTool.Rules
 		}		
 		
         public _3DRudderEditor(ReadOnlyTargetRules Target): base(Target)
-        { 
-            // ... add public include paths required here ...
-            PublicIncludePaths.AddRange( new string[] {
+        {
+			PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+			// ... add public include paths required here ...
+			PublicIncludePaths.AddRange( new string[] {
                 "_3DRudderEditor/Public",
             });
  
